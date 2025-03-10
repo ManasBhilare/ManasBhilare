@@ -3,10 +3,8 @@ name: Quote workflow
 on:
   push:
   schedule:
-    # Run workflow automatically every six hours
     - cron: '0 */6 * * *'
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -17,15 +15,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Ensures full repo history is available
+          fetch-depth: 0
 
-      - name: Pull script to get quote
-        uses: jhamadhav/quote-workflow@main
+      - name: Fetch Quote
+        run: |
+          curl -s https://api.quotable.io/random | jq -r '.content' > quote.txt
+          sed -i '/<!-- QUOTE:START -->/,/<!-- QUOTE:END -->/c\<!-- QUOTE:START -->\n'"$(cat quote.txt)"'\n<!-- QUOTE:END -->' README.md
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "jhamadhav"
+          git config --global user.name "ManasBhilar"
           git config --global user.email "contact@gmail.com"
           git add README.md
-          git commit -m "New Quote added" || echo "No changes to commit"
+          git commit -m "Updated Quote" || echo "No changes to commit"
           git push
