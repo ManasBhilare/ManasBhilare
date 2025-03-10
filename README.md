@@ -52,6 +52,7 @@ WWith a background in data engineering distributed systems and machine learning 
 </p>
 
 <!-- QUOTE:START -->
+
 <!-- QUOTE:END -->
 
 <p align="left"> 
