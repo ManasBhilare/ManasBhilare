@@ -3,7 +3,7 @@ name: Quote workflow
 on:
   push:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 */6 * * *'  # Runs every six hours
 
   workflow_dispatch:
 
@@ -15,14 +15,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Ensures full repo history is available
 
       - name: Fetch Quote
         run: |
           curl -s https://api.quotable.io/random | jq -r '.content' > quote.txt
           sed -i '/<!-- QUOTE:START -->/,/<!-- QUOTE:END -->/c\<!-- QUOTE:START -->\n'"$(cat quote.txt)"'\n<!-- QUOTE:END -->' README.md
 
-            - name: Commit and push changes
+      - name: Commit and push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -31,4 +31,3 @@ jobs:
           git add README.md
           git commit -m "Updated Quote" || exit 0
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-
