@@ -22,10 +22,13 @@ jobs:
           curl -s https://api.quotable.io/random | jq -r '.content' > quote.txt
           sed -i '/<!-- QUOTE:START -->/,/<!-- QUOTE:END -->/c\<!-- QUOTE:START -->\n'"$(cat quote.txt)"'\n<!-- QUOTE:END -->' README.md
 
-      - name: Commit and push changes
+            - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.name "ManasBhilar"
-          git config --global user.email "contact@gmail.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "Updated Quote" || echo "No changes to commit"
-          git push
+          git commit -m "Updated Quote" || exit 0
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
