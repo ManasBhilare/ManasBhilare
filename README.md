@@ -52,7 +52,7 @@ WWith a background in data engineering distributed systems and machine learning 
 </p>
 
 <!-- QUOTE:START -->
-<p align="center"><br><i>When you want something, all the universe conspires in helping you to achieve it💫</i><br><i>– Voltaire.</i><br></p>
+<p align="center"><br><i>When you want something, all the universe conspires in helping you to achieve it💫</i><br><i>– The Alchemist .</i><br></p>
 <!-- QUOTE:END -->
 
 <p align="left"> 
