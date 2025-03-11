@@ -1,28 +1,25 @@
 name: Quote workflow
-
 on:
   push:
-  schedule:
-    - cron: '0 */6 * * *'  # Runs every six hours
+  schedule: # Run workflow automatically
+    - cron: '0 */6 * * *' # Runs every six hour
 
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   update-readme-with-quote:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Pull script to get quote
-        uses: jhamadhav/quote-workflow@Quote
-
+      - uses: actions/checkout@v2
+      - name: pull script to get quote
+        uses: jhamadhav/quote-workflow@main
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "New Quote added" || exit 0
-          git push origin main
-
+          git config --global user.name "jhamadhav"
+          git config --global user.email "contact@gmail.com"
+          git add -A
+          git commit -m "New Quote added"
+          git push
