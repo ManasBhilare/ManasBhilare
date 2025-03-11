@@ -52,7 +52,7 @@ WWith a background in data engineering distributed systems and machine learning 
 </p>
 
 <!-- QUOTE:START -->
-
+<p align="center"><br><i>God gave us the gift of life; it is up to us to give ourselves the gift of living well.</i><br><i>– Voltaire.</i><br></p>
 <!-- QUOTE:END -->
 
 <p align="left"> 
