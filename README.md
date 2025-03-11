@@ -22,7 +22,7 @@ With a background in data engineering, distributed systems, and machine learning
 
 
 
-## Most Used Languages
+## GITHUB Stats
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ManasBhilare&layout=compact&theme=react" alt="Top Languages"/>
