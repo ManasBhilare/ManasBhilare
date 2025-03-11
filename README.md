@@ -27,7 +27,7 @@ WWith a background in data engineering distributed systems and machine learning 
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ManasBhilare&layout=compact&theme=react" alt="Top Languages"/>
 </p>
 
-<h2 style="text-align: center;">🚀 Featured Repositories 🚀</h2>
+<h2 style="text-align: center;">👨‍💻 Featured Repositories 👨‍💻</h2>
 
 <!-- Repo info cards -->
 <p align="center">
