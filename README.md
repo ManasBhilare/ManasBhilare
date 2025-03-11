@@ -13,12 +13,13 @@
 
 # Hi there <img src="https://raw.githubusercontent.com/ManasBhilare/ManasBhilare/main/wave.gif" width="25px">
 
-My name is **Manas Bhilare**, a **Researcher & Student** at **Syracuse University**, specializing in **AI, Machine Learning, and Software Development**.
-WWith a background in data engineering distributed systems and machine learning currently I'm working as a research assistant at SU where we are working on payment workflows
+My name is **Manas Bhilare**, a **Researcher & Student** at **Syracuse University**, specializing in **Distributed Systems, Machine Learning, and Software Development**.  
+With a background in data engineering, distributed systems, and machine learning, currently, I'm working as a research assistant at Syracuse University.
 
-💻 My interests lie within AI, ML, and scalable software solutions.
+🖥️ My interests lie within AI, ML, and scalable software solutions.  
 
-🎳 Outside of tech, I'm a proud **nerd**, I **love bowling**, **video games**, and playing the **ukulele**!
+🐱‍🏍 Outside of tech, I'm a proud **nerd**, I **love bowling**, **video games**, playing the **ukulele**, and **volunteering**!  
+
 
 
 ## Most Used Languages
