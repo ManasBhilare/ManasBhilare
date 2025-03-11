@@ -18,10 +18,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}  # Ensures authentication
           fetch-depth: 0  
 
-      - name: Fetch Quote
+       - name: Fetch Quote
         run: |
-          curl -s https://api.quotable.io/random | jq -r '.content' > quote.txt
-          sed -i '/<!-- QUOTE:START -->/,/<!-- QUOTE:END -->/c\<!-- QUOTE:START -->\n'"$(cat quote.txt)"'\n<!-- QUOTE:END -->' README.md
+          quote=$(curl -s https://api.quotable.io/random | jq -r '.content')
+          echo "Fetched Quote: $quote"
+          awk -v quote="$quote" '
+          /<!-- QUOTE:START -->/ {print; print quote; found=1; next}
+          /<!-- QUOTE:END -->/ {found=0}
+          !found' README.md > temp.md && mv temp.md README.md
+
 
       - name: Commit and push changes
         env:
