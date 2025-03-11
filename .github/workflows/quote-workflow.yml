@@ -1,25 +1,35 @@
 name: Quote workflow
+
 on:
   push:
-  schedule: # Run workflow automatically
-    - cron: '0 */6 * * *' # Runs every six hour
+  schedule:
+    - cron: '0 */6 * * *'  # Runs every six hours
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   update-readme-with-quote:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: pull script to get quote
-        uses: jhamadhav/quote-workflow@main
-      - name: Commit and push changes
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Fetch Quote from Quotable API
         run: |
-          git config --global user.name "jhamadhav"
-          git config --global user.email "contact@gmail.com"
-          git add -A
-          git commit -m "New Quote added"
-          git push
+          quote=$(curl -s https://api.quotable.io/random | jq -r '.content')
+          echo "Fetched Quote: $quote"
+          awk -v quote="$quote" '
+          /<!-- QUOTE:START -->/ {print; print quote; found=1; next}
+          /<!-- QUOTE:END -->/ {found=0}
+          !found' README.md > temp.md && mv temp.md README.md
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Updated Quote from Quotable API" || exit 0
+          git push origin main
