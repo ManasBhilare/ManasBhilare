@@ -15,14 +15,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Fetch Quote from Quotable API
+      - name: Fetch Quote from Stoicism API
         run: |
-          quote=$(curl -s https://api.quotable.io/random | jq -r '.content')
-          echo "Fetched Quote: $quote"
-          awk -v quote="$quote" '
-          /<!-- QUOTE:START -->/ {print; print quote; found=1; next}
-          /<!-- QUOTE:END -->/ {found=0}
-          !found' README.md > temp.md && mv temp.md README.md
+          response=$(curl -s https://stoic.tekkloon.net/stoic-quote)
+          quote=$(echo "$response" | jq -r '.data.quote')
+          author=$(echo "$response" | jq -r '.data.author')
+          full_quote="$quote - $author"
+          echo "Fetched Quote: $full_quote"
+
+          if [ -n "$quote" ]; then
+            awk -v quote="$full_quote" '
+            /<!-- QUOTE:START -->/ {print; print quote; found=1; next}
+            /<!-- QUOTE:END -->/ {found=0}
+            !found' README.md > temp.md && mv temp.md README.md
+          else
+            echo "No quote fetched!"
+            exit 1
+          fi
 
       - name: Commit and push changes
         env:
@@ -31,5 +40,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "Updated Quote from Quotable API" || exit 0
+          git commit -m "Updated Quote from Stoicism API" || exit 0
           git push origin main
