@@ -15,11 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Fetch Quote from Stoicism API
+      - name: Fetch Quote from Quotable API
         run: |
-          response=$(curl -s https://stoic.tekkloon.net/stoic-quote)
-          quote=$(echo "$response" | jq -r '.data.quote')
-          author=$(echo "$response" | jq -r '.data.author')
+          response=$(curl -s https://api.quotable.io/random)
+          quote=$(echo "$response" | jq -r '.content')
+          author=$(echo "$response" | jq -r '.author')
           full_quote="$quote - $author"
           echo "Fetched Quote: $full_quote"
 
@@ -40,5 +40,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "Updated Quote from Stoicism API" || exit 0
+          git commit -m "Updated Quote from Quotable API" || exit 0
           git push origin main
